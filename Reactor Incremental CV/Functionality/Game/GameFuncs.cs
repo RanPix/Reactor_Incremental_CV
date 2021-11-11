@@ -45,7 +45,7 @@ namespace Reactor_Incremental_CV
         public static void SetBlock(in GameVars.BlockType type) // sets the block that you gonna build with
         {
             switch (type) 
-            { // shit begins B)
+            { // shit begins B) or МЫ НАЧИНАЕМ
                 case GameVars.BlockType.UraniumCell:
                     Sprite.Write(0, 20, $"<(J) [ | ] (K)>", ConsoleColor.DarkGreen); // shows which block you choosed
 
@@ -74,13 +74,13 @@ namespace Reactor_Incremental_CV
                     Sprite.Write(0, 20, $"<(J) [ # ] (K)>", ConsoleColor.Gray);
 
                     Sprite.Write(0, 21, new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35), ConsoleColor.Black);
-                    Sprite.Write(0, 21, $"Heat Venting: 3\nPrice: 50", ConsoleColor.Red);
+                    Sprite.Write(0, 21, $"Heat Vent: 3\nPrice: 50", ConsoleColor.Red);
                     break;
                 case GameVars.BlockType.AdvancedVent:
                     Sprite.Write(0, 20, $"<(J) [ # ] (K)>", ConsoleColor.DarkRed);
 
                     Sprite.Write(0, 21, new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35), ConsoleColor.Black);
-                    Sprite.Write(0, 21, $"Heat Venting: 300\nPrice: 12500", ConsoleColor.Red);
+                    Sprite.Write(0, 21, $"Heat Vent: 300\nPrice: 12500", ConsoleColor.Red);
                     break;
             }  
         }

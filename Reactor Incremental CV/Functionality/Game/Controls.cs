@@ -19,25 +19,25 @@ namespace Reactor_Incremental_CV
                 switch (PressedKey.Key) // checkes which key id was used
                 {
                     //movement keys
-                    case ConsoleKey.W: 
+                    case ConsoleKey.W: // move cursor up
                         CurY--;
-                        CurY = Math.Clamp(CurY, (byte)0, (byte)18);
+                        CurY = Math.Clamp(CurY, (byte)0, (byte)18); // to make cursor stay in the borders
 
                         Console.SetCursorPosition(CurX, CurY);
                         break;
-                    case ConsoleKey.S:
+                    case ConsoleKey.S: // move cursor down
                         CurY++;
                         CurY = Math.Clamp(CurY, (byte)0, (byte)18);
 
                         Console.SetCursorPosition(CurX, CurY);
                         break;
-                    case ConsoleKey.A:
+                    case ConsoleKey.A: // move cursor left
                         CurX--;
                         CurX = Math.Clamp(CurX, (byte)0, (byte)34);
 
                         Console.SetCursorPosition(CurX, CurY);
                         break;
-                    case ConsoleKey.D:
+                    case ConsoleKey.D: // move cursor right
                         CurX++;
                         CurX = Math.Clamp(CurX, (byte)0, (byte)34);
 

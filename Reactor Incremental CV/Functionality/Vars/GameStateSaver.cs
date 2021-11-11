@@ -5,11 +5,10 @@ namespace Reactor_Incremental_CV
 {
     class GameStateSaver
     {
-        //const string GameFile = "./../../Game.txt";
-        const string SaveFile = @"./../../../data\save\Save.txt";
+        const string SaveFile = @"C:\Users\lenovo\source\repos\Reactor Incremental CV\Reactor Incremental CV\data\save\Save.txt";
 
         public static void SaveFiles()
-        {
+        { // IF YOU WANT TO CHANGE SAVES FOLLOW THE ORDER OF WRITING AND READING THE FILE
             StreamWriter fileW = new StreamWriter(SaveFile);
 
             fileW.WriteLine(GameFuncs.ReactorHeat);

@@ -5,13 +5,13 @@ namespace Reactor_Incremental_CV
 {
     class GameVars
     {
-        //public static Random rand = new Random();
+        public static Random rand = new Random();
 
         public static List<CellsInfo> Cells = new List<CellsInfo>();
 
         public static List<VentsInfo> Vents = new List<VentsInfo>();
 
-        public enum BlockType
+        public enum BlockType // for switching between the blocks that you can place
         {
             UraniumCell,
             DoubleUraniumCell,
@@ -21,9 +21,9 @@ namespace Reactor_Incremental_CV
             AdvancedVent,
             Count
         }
-        public static BlockType BlockTypeIdx;
+        public static BlockType BlockTypeIdx; // to store which block you gonna build with
 
-        public static bool NotColliding = true;
+        public static bool CellsNotColliding = true;
     }
 
     public class CellsInfo
@@ -68,15 +68,15 @@ namespace Reactor_Incremental_CV
             WhenColliding(ref CellType, -1, 0);
             WhenColliding(ref CellType, 0, -1);
 
-            if(GameVars.NotColliding == true)
+            if(GameVars.CellsNotColliding == true)
             {
                 GameFuncs.Money += this.CellPowerGen;
                 GameFuncs.ReactorHeat += this.CellHeatGen;
             }
 
-            GameFuncs.ReactorHeat = Math.Clamp(GameFuncs.ReactorHeat, 0, 999999);
+            GameFuncs.ReactorHeat = Math.Clamp(GameFuncs.ReactorHeat, 0, 999999); 
 
-            GameVars.NotColliding = true;
+            GameVars.CellsNotColliding = true;
         }
 
         void WhenColliding(ref List<CellsInfo> CellType, int dirX, int dirY)
@@ -86,7 +86,7 @@ namespace Reactor_Incremental_CV
                 GameFuncs.Money += this.CellPowerGen * 2;
                 GameFuncs.ReactorHeat += this.CellHeatGen * 4;
 
-                GameVars.NotColliding = false;
+                GameVars.CellsNotColliding = false;
             }
         }
     }
