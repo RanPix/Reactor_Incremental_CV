@@ -8,4 +8,4 @@ authors \ creators of the original game is - [Cael](https://www.kongregate.com/a
 
 the music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-classic)
 
-you can find releases [here](https://github.com/RanPix/Reactor_Incremental_CV/releases)
+to download the game click [here](https://github.com/RanPix/Reactor_Incremental_CV/releases)
