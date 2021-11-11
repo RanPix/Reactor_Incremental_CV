@@ -7,3 +7,5 @@ you can play original game [here](https://www.kongregate.com/games/cael/reactor-
 authors \ creators of the original game is - [Cael](https://www.kongregate.com/accounts/Cael) and [Mephyst](https://www.kongregate.com/accounts/Mephyst)
 
 the music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-classic)
+
+you can find releases [here](https://github.com/RanPix/Reactor_Incremental_CV/releases)
