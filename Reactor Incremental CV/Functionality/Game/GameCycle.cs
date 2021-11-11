@@ -39,7 +39,7 @@ namespace Reactor_Incremental_CV
 
             GameFuncs.SetBlock(in GameVars.BlockTypeIdx);
 
-            Sprite.Write(15, 21, "Press (T)", ConsoleColor.White);
+            Sprite.Write(15, 21, "For controls - (T)", ConsoleColor.White); 
 
             Sounds.MusicPlayer();
         }

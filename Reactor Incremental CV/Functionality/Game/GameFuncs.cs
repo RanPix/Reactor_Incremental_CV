@@ -95,53 +95,65 @@ namespace Reactor_Incremental_CV
                 switch(type) 
                 {
                     case GameVars.BlockType.UraniumCell:
-                        Sprite.Draw(CurX, CurY, '|', ConsoleColor.DarkGreen); // draws a sprite of a block
-
                         if (Money >= 10)
+                        {
+                            Sprite.Draw(CurX, CurY, '|', ConsoleColor.DarkGreen); // draws a sprite of a block
+
                             Money -= 10;
 
-                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 15, 1, 1, '|', ConsoleColor.DarkGreen)); // Uranium cell
+                            GameVars.Cells.Add(new CellsInfo(CurX, CurY, 15, 1, 1, '|', ConsoleColor.DarkGreen)); // Uranium cell
+                        }
                         break;
                     case GameVars.BlockType.DoubleUraniumCell:
-                        Sprite.Draw(CurX, CurY, '‖', ConsoleColor.DarkGreen); // draws a sprite of a block
-
                         if (Money >= 25)
+                        {
+                            Sprite.Draw(CurX, CurY, '‖', ConsoleColor.DarkGreen);
+
                             Money -= 25;
 
-                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 20, 4, 8, '‖', ConsoleColor.DarkGreen)); // Double uranium cell
+                            GameVars.Cells.Add(new CellsInfo(CurX, CurY, 20, 4, 8, '‖', ConsoleColor.DarkGreen)); // Double uranium cell
+                        }
                         break;
                     case GameVars.BlockType.PlutoniumCell:
-                        Sprite.Draw(CurX, CurY, '|', ConsoleColor.DarkYellow);
-
                         if (Money >= 7000)
+                        {
+                            Sprite.Draw(CurX, CurY, '|', ConsoleColor.DarkYellow);
+
                             Money -= 7000;
 
-                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 60, 150, 150, '|', ConsoleColor.DarkGreen));
+                            GameVars.Cells.Add(new CellsInfo(CurX, CurY, 60, 150, 150, '|', ConsoleColor.DarkGreen)); // Plutonium Cell
+                        }
                         break;
                     case GameVars.BlockType.DoublePlutoniumCell:
-                        Sprite.Draw(CurX, CurY, '‖', ConsoleColor.DarkYellow);
-
                         if (Money >= 14000)
+                        {
+                            Sprite.Draw(CurX, CurY, '‖', ConsoleColor.DarkYellow);
+
                             Money -= 14000;
 
-                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 100, 600, 1200, '‖', ConsoleColor.DarkGreen)); 
+                            GameVars.Cells.Add(new CellsInfo(CurX, CurY, 100, 600, 1200, '‖', ConsoleColor.DarkGreen)); // Double plutonium cell
+                        }
                         break;
 
                     case GameVars.BlockType.BasicVent:
-                        Sprite.Draw(CurX, CurY, '#', ConsoleColor.Gray);
-
                         if (Money >= 50)
+                        {
+                            Sprite.Draw(CurX, CurY, '#', ConsoleColor.Gray);
+
                             Money -= 50;
 
-                        GameVars.Vents.Add(new VentsInfo(CurX, CurY, 4, ConsoleColor.Gray));
+                            GameVars.Vents.Add(new VentsInfo(CurX, CurY, 4, ConsoleColor.Gray)); // basic vent
+                        }
                         break;
                     case GameVars.BlockType.AdvancedVent:
-                        Sprite.Draw(CurX, CurY, '#', ConsoleColor.DarkRed);
-
                         if (Money >= 12500)
+                        {
+                            Sprite.Draw(CurX, CurY, '#', ConsoleColor.DarkRed);
+
                             Money -= 12500;
 
-                        GameVars.Vents.Add(new VentsInfo(CurX, CurY, 300, ConsoleColor.DarkRed));
+                            GameVars.Vents.Add(new VentsInfo(CurX, CurY, 300, ConsoleColor.DarkRed)); // advanced vent
+                        }
                         break;
                 }
             }
@@ -164,6 +176,8 @@ namespace Reactor_Incremental_CV
 
                 Sprite.Draw(CurX, CurY, ' ', ConsoleColor.Black);
             }
+
+            Sprite.Draw(CurX, CurY, ' ', ConsoleColor.Black); // for removeing died gray cells
         }
     }
 }
