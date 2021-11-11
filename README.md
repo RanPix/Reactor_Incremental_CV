@@ -4,6 +4,6 @@ this is my first biggest project so far and this is "remake" or idk of the React
 
 you can play original game [here](https://www.kongregate.com/games/cael/reactor-incremental)
 
-and creators of this game is - [Cael](https://www.kongregate.com/accounts/Cael) and [Mephyst](https://www.kongregate.com/accounts/Mephyst)
+authors \ creators of the original game is - [Cael](https://www.kongregate.com/accounts/Cael) and [Mephyst](https://www.kongregate.com/accounts/Mephyst)
 
 the music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-classic)
