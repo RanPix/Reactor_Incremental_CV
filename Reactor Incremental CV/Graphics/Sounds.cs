@@ -12,7 +12,7 @@ namespace Reactor_Incremental_CV
         {
             player.settings.volume = 2;
 
-            player.URL = $@"C:\Users\lenovo\source\repos\Reactor Incremental CV\Reactor Incremental CV\data\music\g{rand.Next(1, 10)}.mp3";
+            player.URL = $@"C:./../../../data\music\g{rand.Next(1, 10)}.mp3";
             player.controls.play();
         }
     }

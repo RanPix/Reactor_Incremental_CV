@@ -6,7 +6,7 @@ namespace Reactor_Incremental_CV
     {
         public static long ReactorHeat = 0; // for displaying reactor heat and for advanced reactor builds
 
-        public static long Money = 10;
+        public static long Money = 10; // money
 
         public static void DisplayReactorInfo()
         {

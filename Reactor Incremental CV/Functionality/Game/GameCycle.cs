@@ -8,8 +8,6 @@ namespace Reactor_Incremental_CV
 
         static void Main(string[] args)
         {
-            Sounds.MusicPlayer();
-
             InitGame();
 
             while (true)
@@ -41,7 +39,9 @@ namespace Reactor_Incremental_CV
 
             GameFuncs.SetBlock(in GameVars.BlockTypeIdx);
 
-            Sprite.Write(15, 21, "Press (T)", ConsoleColor.White); 
+            Sprite.Write(15, 21, "Press (T)", ConsoleColor.White);
+
+            Sounds.MusicPlayer();
         }
     }
 }
