@@ -8,7 +8,7 @@ The music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-clas
 
 **To download this game click [here](https://github.com/RanPix/Reactor_Incremental_CV/releases)**
 
-**CONTROLS FOR THIS GAME
+**CONTROLS FOR THIS GAME**
 
 - Movement keys - **W, A, S, D**
 - Pause game - **SPACEBAR**
