@@ -90,6 +90,14 @@ namespace Reactor_Incremental_CV
                         GameStateSaver.SaveReader();
 
                         Sprite.Write(23, 20, "Loaded", ConsoleColor.Yellow);
+
+                        GameFuncs.DisplayReactorInfo();
+
+                        GamePaused = true;
+
+                        Sprite.Write(30, 20, "Pause", ConsoleColor.Red);
+
+                        GameFuncs.SetBlock(GameVars.BlockTypeIdx);
                         break;
 
                     case ConsoleKey.T:

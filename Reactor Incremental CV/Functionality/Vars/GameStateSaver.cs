@@ -5,7 +5,8 @@ namespace Reactor_Incremental_CV
 {
     class GameStateSaver
     {
-        private const string SaveFile = @"C:\Users\lenovo\source\repos\Reactor Incremental CV\Reactor Incremental CV\data\save\Save.txt";
+        private static string SaveFile = Directory.GetCurrentDirectory() + @"\data\save\Save.txt"; // for releases
+        //private const string SaveFile = @"C:\Users\lenovo\source\repos\Reactor Incremental CV\Reactor Incremental CV\data\save\Save.txt"; // for testing (put here your directory path)
 
         public static void SaveFiles()
         { // IF YOU WANT TO CHANGE SAVES FOLLOW THE ORDER OF WRITING AND READING THE FILE
@@ -13,8 +14,6 @@ namespace Reactor_Incremental_CV
 
             fileW.WriteLine(GameFuncs.ReactorHeat);
             fileW.WriteLine(GameFuncs.Money);
-
-            fileW.WriteLine((int)GameVars.BlockTypeIdx);
 
             fileW.WriteLine(GameVars.Cells.Count);
             fileW.WriteLine(GameVars.Vents.Count);
@@ -59,10 +58,6 @@ namespace Reactor_Incremental_CV
             GameFuncs.ReactorHeat = long.Parse(fileR.ReadLine());
             GameFuncs.Money = long.Parse(fileR.ReadLine());
 
-            GameVars.BlockTypeIdx = (GameVars.BlockType)int.Parse(fileR.ReadLine());
-
-            GameFuncs.SetBlock(GameVars.BlockTypeIdx);
-
             int cells_saved_lenght = int.Parse(fileR.ReadLine());
             int vents_saved_lenght = int.Parse(fileR.ReadLine());
 
@@ -99,11 +94,6 @@ namespace Reactor_Incremental_CV
             }
 
             fileR.Close();
-
-            GameFuncs.DisplayReactorInfo();
-
-            Controls.GamePaused = true;
-            Sprite.Write(30, 20, "Pause", ConsoleColor.Red);
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Reactor_Incremental_CV
                 if (Controls.GamePaused != true)
                     TickCounter++;
 
-                if(Controls.GamePaused != true && TickCounter == 5000)
+                if(Controls.GamePaused != true && TickCounter == 10000)
                 {
                     GameFuncs.DisplayReactorInfo();
                     UpdateBlockInfo.BlocksUpdate();

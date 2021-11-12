@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.IO;
 
 namespace Reactor_Incremental_CV
 {
@@ -10,7 +10,7 @@ namespace Reactor_Incremental_CV
         {
             player.settings.volume = 1;
 
-            player.URL = $@"C:\Users\lenovo\source\repos\Reactor Incremental CV\Reactor Incremental CV\data\music\g{GameVars.rand.Next(1, 10)}.mp3";
+            player.URL = Directory.GetCurrentDirectory() + $@"\data\music\g{GameVars.rand.Next(1, 10)}.mp3";
             player.controls.play();
         }
     }
