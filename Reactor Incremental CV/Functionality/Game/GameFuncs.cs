@@ -20,23 +20,13 @@ namespace Reactor_Incremental_CV
 
         public static void ReactorExplosion()
         {
-            for (int i = 0; i < 19; i++)
-            { // explosion effect
-                Console.SetCursorPosition(0, i);
-
-                Console.ForegroundColor  = ConsoleColor.DarkRed;
-
-                Console.WriteLine(new string('*', 35));
-            }
+            for (byte i = 0; i < 19; i++) // explosion effect
+                Sprite.Write(0, i, new string('*', 35), ConsoleColor.DarkRed);
 
             System.Threading.Thread.Sleep(500);
 
-            for (int i = 0; i < 19; i++)
-            {
-                Console.SetCursorPosition(0, i);
-
-                Console.WriteLine(new string(' ', 35));
-            }
+            for (byte i = 0; i < 19; i++) // erase explosion
+                Sprite.Write(0, i, new string(' ', 35), ConsoleColor.DarkRed);
 
             GameVars.Cells.RemoveRange(0, GameVars.Cells.Count);
             GameVars.Vents.RemoveRange(0, GameVars.Vents.Count);

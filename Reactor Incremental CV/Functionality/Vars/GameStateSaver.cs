@@ -48,6 +48,9 @@ namespace Reactor_Incremental_CV
 
         public static void SaveReader()
         {
+            for (byte i = 0; i < 19; i++)
+                Sprite.Write(0, i, new string(' ', 35), ConsoleColor.DarkRed);
+
             GameVars.Cells.RemoveRange(0, GameVars.Cells.Count);
             GameVars.Vents.RemoveRange(0, GameVars.Vents.Count);
 
