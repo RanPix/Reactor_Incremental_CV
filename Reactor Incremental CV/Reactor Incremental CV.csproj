@@ -7,6 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="data\music\g1.mp3" />
+    <None Remove="data\music\g10.mp3" />
+    <None Remove="data\music\g2.mp3" />
+    <None Remove="data\music\g3.mp3" />
+    <None Remove="data\music\g4.mp3" />
+    <None Remove="data\music\g5.mp3" />
+    <None Remove="data\music\g6.mp3" />
+    <None Remove="data\music\g7.mp3" />
+    <None Remove="data\music\g8.mp3" />
+    <None Remove="data\music\g9.mp3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <COMReference Include="WMPLib">
       <WrapperTool>tlbimp</WrapperTool>
       <VersionMinor>0</VersionMinor>
@@ -16,6 +29,19 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="data\music\g1.mp3" />
+    <EmbeddedResource Include="data\music\g10.mp3" />
+    <EmbeddedResource Include="data\music\g2.mp3" />
+    <EmbeddedResource Include="data\music\g3.mp3" />
+    <EmbeddedResource Include="data\music\g4.mp3" />
+    <EmbeddedResource Include="data\music\g5.mp3" />
+    <EmbeddedResource Include="data\music\g6.mp3" />
+    <EmbeddedResource Include="data\music\g7.mp3" />
+    <EmbeddedResource Include="data\music\g8.mp3" />
+    <EmbeddedResource Include="data\music\g9.mp3" />
   </ItemGroup>
 
   <ItemGroup>

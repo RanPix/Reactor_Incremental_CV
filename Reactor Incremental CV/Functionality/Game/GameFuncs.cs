@@ -14,7 +14,7 @@ class GameFuncs
 
         Sprite.Write(0, 25, $"Money: {Money} Heat: {ReactorHeat} / 1000", ConsoleColor.Yellow);
 
-        if (ReactorHeat >= 1000)
+        if (ReactorHeat >= 1000 && !Controls.GamePaused)
             ReactorExplosion();
     }
 
@@ -36,6 +36,7 @@ class GameFuncs
     {
         switch (type)
         { // shit begins B)
+            //cells
             case GameVars.BlockType.UraniumCell:
                 Sprite.Write(0, 20, $"<(J) [ | ] (K)>", ConsoleColor.DarkGreen); // shows which block you choosed
 
@@ -60,6 +61,8 @@ class GameFuncs
                 Sprite.Write(0, 21, new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35), ConsoleColor.Black);
                 Sprite.Write(0, 21, $"Power Gen: 600\nHeat Gen: 600\nDurability: 100\nPrice: 14000", ConsoleColor.Red);
                 break;
+
+            //vents
             case GameVars.BlockType.BasicVent:
                 Sprite.Write(0, 20, $"<(J) [ # ] (K)>", ConsoleColor.Gray);
 
@@ -84,6 +87,7 @@ class GameFuncs
         {
             switch (type)
             {
+                //cells
                 case GameVars.BlockType.UraniumCell:
                     if (Money >= 10)
                     {
@@ -111,7 +115,7 @@ class GameFuncs
 
                         Money -= 7000;
 
-                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 60, 150, 150, '|', ConsoleColor.DarkGreen)); // Plutonium Cell
+                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 60, 150, 150, '|', ConsoleColor.DarkYellow)); // Plutonium Cell
                     }
                     break;
                 case GameVars.BlockType.DoublePlutoniumCell:
@@ -121,10 +125,12 @@ class GameFuncs
 
                         Money -= 14000;
 
-                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 100, 600, 1200, '‖', ConsoleColor.DarkGreen)); // Double plutonium cell
+                        GameVars.Cells.Add(new CellsInfo(CurX, CurY, 100, 600, 1200, '‖', ConsoleColor.DarkYellow)); // Double plutonium cell
                     }
                     break;
 
+
+                //vents
                 case GameVars.BlockType.BasicVent:
                     if (Money >= 50)
                     {

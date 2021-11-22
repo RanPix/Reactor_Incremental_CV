@@ -15,14 +15,14 @@ class GameCycle
             if (Controls.GamePaused != true)
                 TickCounter++;
 
-            if(Controls.GamePaused != true && TickCounter == 9000)
+            Controls.KeyChecker();
+
+            if(!Controls.GamePaused && TickCounter == 9000)
             {
                 GameFuncs.DisplayReactorInfo();
                 UpdateBlockInfo.BlocksUpdate();
                 TickCounter = 0;
             }
-
-            Controls.KeyChecker();
         }
     }
     //╣ ║ ╗ ╝ ╚ ╔ ╩ ╦ ╠ ╬ ═

@@ -100,8 +100,11 @@ class Controls
                     break;
 
                 case ConsoleKey.T:
-                    Sprite.Write(15, 21, "Controls: W, A, S, D", ConsoleColor.White);
-                    Sprite.Write(15, 22, "U, I, N, M, H, SPACE", ConsoleColor.White);
+                    Sprite.Write(15, 21, "Keys: W,A,S,D, U, I", ConsoleColor.White);
+                    Sprite.Write(15, 22, "O, N, M, H, SPACE", ConsoleColor.White);
+                    break;
+                case ConsoleKey.O:
+                    Sounds.MusicPlayer();
                     break;
             }
         }
