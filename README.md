@@ -19,4 +19,7 @@ The music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-clas
 - Remove heat - **H**
 - Save game - **U**
 - Load save - **I**
-- Short controls - **T**
+- Short key binds - **T**
+- Launch music - **O**
+
+**TO LAUNCH THE GAME YOU NEED TO DOWNLOAD [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) AND [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)**
