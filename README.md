@@ -14,8 +14,8 @@ The music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-clas
 - Pause game - **SPACEBAR**
 - Place block - **N**
 - Remove block - **M**
-- Set previous building block - **J**
-- Set next building block - **N**
+- Previous building block - **J**
+- Next building block - **N**
 - Remove heat - **H**
 - Save game - **U**
 - Load save - **I**
