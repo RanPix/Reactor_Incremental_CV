@@ -23,3 +23,5 @@ The music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-clas
 - Launch music - **O**
 
 **TO LAUNCH THE GAME YOU NEED TO DOWNLOAD [.NET Framework](https://dotnet.microsoft.com/download/dotnet-framework) AND [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)**
+
+To make the game more comfortable while you in console use **Ctrl + MouseWheel**  :)
