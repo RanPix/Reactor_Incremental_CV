@@ -1,47 +1,46 @@
 ﻿using System;
 
-namespace Reactor_Incremental_CV
+namespace Reactor_Incremental_CV;
+
+class GameCycle
 {
-    class GameCycle
+    private static int TickCounter;
+
+    static void Main(string[] args)
     {
-        private static int TickCounter;
+        InitGame();
 
-        static void Main(string[] args)
+        while (true)
         {
-            InitGame();
+            if (Controls.GamePaused != true)
+                TickCounter++;
 
-            while (true)
+            if(Controls.GamePaused != true && TickCounter == 9000)
             {
-                if (Controls.GamePaused != true)
-                    TickCounter++;
-
-                if(Controls.GamePaused != true && TickCounter == 10000)
-                {
-                    GameFuncs.DisplayReactorInfo();
-                    UpdateBlockInfo.BlocksUpdate();
-                    TickCounter = 0;
-                }
-
-                Controls.KeyChecker();
+                GameFuncs.DisplayReactorInfo();
+                UpdateBlockInfo.BlocksUpdate();
+                TickCounter = 0;
             }
+
+            Controls.KeyChecker();
         }
-        //╣ ║ ╗ ╝ ╚ ╔ ╩ ╦ ╠ ╬ ═
-        static void InitGame()
-        {
-            Console.InputEncoding = System.Text.Encoding.UTF8;
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
+    }
+    //╣ ║ ╗ ╝ ╚ ╔ ╩ ╦ ╠ ╬ ═
+    static void InitGame()
+    {
+        Console.InputEncoding = System.Text.Encoding.UTF8;
+        Console.OutputEncoding = System.Text.Encoding.UTF8;
 
-            Console.Title = "Reactor Incremental CV";
+        Console.Title = "Reactor Incremental CV";
 
-            Console.SetWindowSize(35, 26);
+        Console.SetWindowSize(35, 26);
 
-            Sprite.Write(0, 19, new string('═', 35), ConsoleColor.White);
+        Sprite.Write(0, 19, new string('═', 35), ConsoleColor.White);
 
-            GameFuncs.SetBlock(in GameVars.BlockTypeIdx);
+        GameFuncs.SetBlock(in GameVars.BlockTypeIdx);
 
-            Sprite.Write(15, 21, "For controls - (T)", ConsoleColor.White); 
+        Sprite.Write(15, 21, "For controls - (T)", ConsoleColor.White); 
 
-            Sounds.MusicPlayer();
-        }
+        Sounds.MusicPlayer();
     }
 }

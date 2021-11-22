@@ -1,34 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Reactor_Incremental_CV
-{
-    class Sprite
-    { 
-        public static void Draw(byte CurX, byte CurY, char Sprite, ConsoleColor Color)
-        {
-            Console.SetCursorPosition(CurX, CurY);
+namespace Reactor_Incremental_CV;
 
-            Console.ForegroundColor = Color;
+class Sprite
+{ 
+    public static void Draw(byte CurX, byte CurY, char Sprite, ConsoleColor Color)
+    {
+        Console.SetCursorPosition(CurX, CurY);
 
-            Console.Write(Sprite);
+        Console.ForegroundColor = Color;
 
-            Console.SetCursorPosition(CurX, CurY);
+        Console.Write(Sprite);
 
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+        Console.SetCursorPosition(CurX, CurY);
 
-        public static void Write(byte CurX, byte CurY, string Model, ConsoleColor Color)
-        {
-            Console.SetCursorPosition(CurX, CurY);
+        Console.ForegroundColor = ConsoleColor.White;
+    }
 
-            Console.ForegroundColor = Color;
+    public static void Write(byte CurX, byte CurY, string Model, ConsoleColor Color)
+    {
+        Console.SetCursorPosition(CurX, CurY);
 
-            Console.Write(Model);
+        Console.ForegroundColor = Color;
 
-            Console.SetCursorPosition(CurX, CurY);
+        Console.Write(Model);
 
-            Console.ForegroundColor = ConsoleColor.White;
-        }
+        Console.SetCursorPosition(CurX, CurY);
+
+        Console.ForegroundColor = ConsoleColor.White;
     }
 }
