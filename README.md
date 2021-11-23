@@ -1,6 +1,6 @@
 # Reactor_Incremental_CV
 
-This is my first big and biggest project so far and this is "remake" or idk of the Reactor Incremental game that you can play in console
+This is my first big and biggest project so far and this is re creation of the Reactor Incremental game that you can play in console
 
 Authors \ creators of the original game is - [Cael](https://www.kongregate.com/accounts/Cael) and [Mephyst](https://www.kongregate.com/accounts/Mephyst) and you play it [here](https://www.kongregate.com/games/cael/reactor-incremental)
 
