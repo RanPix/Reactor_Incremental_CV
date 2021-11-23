@@ -2,7 +2,7 @@
 
 This is my first big and biggest project so far and this is re creation of the Reactor Incremental game that you can play in console
 
-Authors \ creators of the original game is - [Cael](https://www.kongregate.com/accounts/Cael) and [Mephyst](https://www.kongregate.com/accounts/Mephyst) and you play it [here](https://www.kongregate.com/games/cael/reactor-incremental)
+Authors \ creators of the original game is - [Cael](https://www.kongregate.com/accounts/Cael) and [Mephyst](https://www.kongregate.com/accounts/Mephyst) and you can play it [here](https://www.kongregate.com/games/cael/reactor-incremental)
 
 The music was took from [Mindustry Classic](https://anuke.itch.io/mindustry-classic)
 
