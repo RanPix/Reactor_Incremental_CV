@@ -59,7 +59,7 @@ class GameFuncs
                 Sprite.Write(0, 20, $"<(J) [ ‖ ] (K)>", ConsoleColor.DarkYellow);
 
                 Sprite.Write(0, 21, new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35) + '\n' + new string(' ', 35), ConsoleColor.Black);
-                Sprite.Write(0, 21, $"Power Gen: 600\nHeat Gen: 600\nDurability: 100\nPrice: 14000", ConsoleColor.Red);
+                Sprite.Write(0, 21, $"Power Gen: 600\nHeat Gen: 1200\nDurability: 100\nPrice: 14000", ConsoleColor.Red);
                 break;
 
             //vents
