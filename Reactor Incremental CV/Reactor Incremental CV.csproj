@@ -7,16 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="data\music\g1.mp3" />
-    <None Remove="data\music\g10.mp3" />
-    <None Remove="data\music\g2.mp3" />
-    <None Remove="data\music\g3.mp3" />
-    <None Remove="data\music\g4.mp3" />
-    <None Remove="data\music\g5.mp3" />
-    <None Remove="data\music\g6.mp3" />
-    <None Remove="data\music\g7.mp3" />
-    <None Remove="data\music\g8.mp3" />
-    <None Remove="data\music\g9.mp3" />
+    <Compile Remove="data\**" />
+    <EmbeddedResource Remove="data\**" />
+    <None Remove="data\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,24 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="data\music\g1.mp3" />
-    <EmbeddedResource Include="data\music\g10.mp3" />
-    <EmbeddedResource Include="data\music\g2.mp3" />
-    <EmbeddedResource Include="data\music\g3.mp3" />
-    <EmbeddedResource Include="data\music\g4.mp3" />
-    <EmbeddedResource Include="data\music\g5.mp3" />
-    <EmbeddedResource Include="data\music\g6.mp3" />
-    <EmbeddedResource Include="data\music\g7.mp3" />
-    <EmbeddedResource Include="data\music\g8.mp3" />
-    <EmbeddedResource Include="data\music\g9.mp3" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Windows.Extensions" Version="5.0.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="data\save\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Reactor_Incremental_CV;
+﻿namespace Reactor_Incremental_CV;
 
 class GameCycle
 {
@@ -8,39 +6,22 @@ class GameCycle
 
     static void Main(string[] args)
     {
-        InitGame();
-
-        while (true)
+        InitGame.Init();
+        
+        while (true) 
         {
-            if (Controls.GamePaused != true)
+            if (!Controls.GamePaused) // if game paused != true
                 TickCounter++;
 
             Controls.KeyChecker();
 
-            if(!Controls.GamePaused && TickCounter == 9000)
+            if (!Controls.GamePaused && TickCounter == 9000)
             {
-                GameFuncs.DisplayReactorInfo();
                 UpdateBlockInfo.BlocksUpdate();
+                GameFuncs.DisplayReactorInfo();
                 TickCounter = 0;
             }
+
         }
-    }
-    //╣ ║ ╗ ╝ ╚ ╔ ╩ ╦ ╠ ╬ ═
-    static void InitGame()
-    {
-        Console.InputEncoding = System.Text.Encoding.UTF8;
-        Console.OutputEncoding = System.Text.Encoding.UTF8;
-
-        Console.Title = "Reactor Incremental CV";
-
-        Console.SetWindowSize(35, 26);
-
-        Sprite.Write(0, 19, new string('═', 35), ConsoleColor.White);
-
-        GameFuncs.SetBlock(in GameVars.BlockTypeIdx);
-
-        Sprite.Write(15, 21, "For controls - (T)", ConsoleColor.White); 
-
-        Sounds.MusicPlayer();
     }
 }

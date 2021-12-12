@@ -20,29 +20,30 @@ class Controls
                 //movement keys
                 case ConsoleKey.W: // move cursor up
                     CurY--;
-                    CurY = Math.Clamp(CurY, (byte)0, (byte)18); // to make cursor stay in the borders
+                    CurY = Math.Clamp(CurY, (byte)1, (byte)18); // to make cursor stay in the borders
 
                     Console.SetCursorPosition(CurX, CurY);
                     break;
                 case ConsoleKey.S: // move cursor down
                     CurY++;
-                    CurY = Math.Clamp(CurY, (byte)0, (byte)18);
+                    CurY = Math.Clamp(CurY, (byte)1, (byte)18);
 
                     Console.SetCursorPosition(CurX, CurY);
                     break;
                 case ConsoleKey.A: // move cursor left
                     CurX--;
-                    CurX = Math.Clamp(CurX, (byte)0, (byte)34);
+                    CurX = Math.Clamp(CurX, (byte)1, (byte)29);
 
                     Console.SetCursorPosition(CurX, CurY);
                     break;
                 case ConsoleKey.D: // move cursor right
                     CurX++;
-                    CurX = Math.Clamp(CurX, (byte)0, (byte)34);
+                    CurX = Math.Clamp(CurX, (byte)1, (byte)29);
 
                     Console.SetCursorPosition(CurX, CurY);
                     break;
                 //movement keys
+
                 //game interaction keys
                 case ConsoleKey.N:// places block
                     GameFuncs.PlaceBlock(CurX, CurY, in GameVars.BlockTypeIdx);
@@ -55,23 +56,28 @@ class Controls
                     GamePaused = !GamePaused;
 
                     if (GamePaused)
-                        Sprite.Write(30, 20, "Pause", ConsoleColor.Red);
+                        Sprite.Write(31, 19, "Pause", ConsoleColor.Red);
                     else
-                        Sprite.Write(30, 20, "     ", ConsoleColor.Black);
-
+                        Sprite.Write(31, 19, "     ", ConsoleColor.Black);
                     break;
-                //game interaction keys
-                //interface keys
                 case ConsoleKey.H: // takes money from generated power
-                    GameFuncs.ReactorHeat--;
-                    GameFuncs.ReactorHeat = Math.Clamp(GameFuncs.ReactorHeat, 0, 999999);
+                    if(!GamePaused)
+                        GameVars.ReactorHeat--;
+                    //GameVars.ReactorHeat = Math.Clamp(GameVars.ReactorHeat, 0, long.MaxValue);
                     break;
+                /*case ConsoleKey.B:
+                    GameVars.Money += GameVars.Power;
 
+                    GameVars.Power = 0;
+                    break;*/
+                //game interaction keys
+
+                //interface keys
                 case ConsoleKey.J: // takes the block moving the list to the left
                     GameVars.BlockTypeIdx--;
                     GameVars.BlockTypeIdx = (GameVars.BlockType)Math.Clamp((int)GameVars.BlockTypeIdx, 0, (int)GameVars.BlockType.Count - 1);
-                        
-                    GameFuncs.SetBlock(in GameVars.BlockTypeIdx);  // re write нахуй 
+
+                    GameFuncs.SetBlock(in GameVars.BlockTypeIdx);
                     break;
                 case ConsoleKey.K: // takes the block moving the list to the right
                     GameVars.BlockTypeIdx++;
@@ -81,31 +87,26 @@ class Controls
                     break;
 
                 case ConsoleKey.U: // saving
-                    GameStateSaver.SaveFiles();
+                    GameStateSaver.SaveState();
 
-                    Sprite.Write(23, 20, "Saved ", ConsoleColor.Yellow);
+                    Sprite.Write(31, 18, "Saved ", ConsoleColor.Yellow);
                     break;
                 case ConsoleKey.I: // loading save
                     GameStateSaver.SaveReader();
 
-                    Sprite.Write(23, 20, "Loaded", ConsoleColor.Yellow);
-
-                    GameFuncs.DisplayReactorInfo();
+                    Sprite.Write(31, 18, "Loaded", ConsoleColor.Yellow);
 
                     GamePaused = true;
 
-                    Sprite.Write(30, 20, "Pause", ConsoleColor.Red);
+                    Sprite.Write(31, 19, "Pause", ConsoleColor.Red);
 
-                    GameFuncs.SetBlock(GameVars.BlockTypeIdx);
+                    InitGame.InitGraphics();
                     break;
 
-                case ConsoleKey.T:
-                    Sprite.Write(15, 21, "Keys: W,A,S,D, U, I", ConsoleColor.White);
-                    Sprite.Write(15, 22, "O, N, M, H, SPACE", ConsoleColor.White);
-                    break;
                 case ConsoleKey.O:
                     Sounds.MusicPlayer();
                     break;
+                //interface keys
             }
         }
     }

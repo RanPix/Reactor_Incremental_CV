@@ -5,41 +5,81 @@ namespace Reactor_Incremental_CV;
 
 class GameVars
 {
+    public static long ReactorHeat = 0; // for displaying reactor heat
+    public static long MaxReactorHeat = 1000; // yes
+
+    //public static long MaxPowerCap = 100; // can be expanded with power capacitors
+    //public static long Power = 0; // sellable power
+    public static long Money = 10; // money
+
     public static Random rand = new Random();
 
     public static List<CellsInfo> Cells = new List<CellsInfo>();
-
+    public static List<ReflectorsInfo> Reflectors = new List<ReflectorsInfo>();
+    public static List<PlatingsInfo> Platings = new List<PlatingsInfo>();
     public static List<VentsInfo> Vents = new List<VentsInfo>();
+    public static List<OutletsInfo> Outlets = new List<OutletsInfo>();
 
     public enum BlockType // for switching between the blocks that you can place
     {
+        // cells
         UraniumCell,
         DoubleUraniumCell,
+
         PlutoniumCell,
         DoublePlutoniumCell,
+
+        ThoriumCell,
+        DoubleThoriumCell,
+        // cells
+
+        // reflectors
+        BasicReflector,
+        AdvancedReflector,
+        SuperReflector,
+        // reflectors
+
+        // platings
+        BasicPlating,
+        AdvancedPlating,
+        SuperPlating,
+        // platings
+
+        // outlets
+        BasicOutlet,
+        AdvancedOutlet,
+        SuperOutlet,
+        // outlets
+
+        // vents
         BasicVent,
         AdvancedVent,
-        Count
+        SuperVent,
+        // vents
+
+        Count // yes
     }
     public static BlockType BlockTypeIdx; // to store which block you gonna build with
 
-    public static bool CellsNotColliding = true;
+    public static bool CellsColliding = false;
 }
 
-public class CellsInfo
+// SHOULD I DO SEPERATE SCRIPT FOR EACH BLOCK INFO????
+
+public class CellsInfo // class for fuel cells
 {
     public byte X;
     public byte Y;
 
-    public byte CellLife;
+    public int CellLife;
 
     public int CellPowerGen;
     public int CellHeatGen;
 
-    public char CellSprite; // for loading save 
+    public string CellSprite; // for loading save 
     public ConsoleColor CellColor;
 
-    public CellsInfo(byte sCellX, byte sCellY, byte sCellLife, int sCellPowerGen, int sCellHeatGen, char sCellSprite, ConsoleColor sCellColor)
+    public CellsInfo(byte sCellX, byte sCellY, int sCellLife, int sCellPowerGen, int sCellHeatGen, string sCellSprite, ConsoleColor sCellColor)
     {// 's' in variables means "set"
         this.X = sCellX;
         this.Y = sCellY;
@@ -53,103 +93,248 @@ public class CellsInfo
         this.CellColor = sCellColor;
     }
 
-    public void Update(int ListIndex, ref List<CellsInfo> CellType)
+    public void Update() // vent functionality
     {
         this.CellLife--; // removes 1 life from object of *THIS* index
  
         if (this.CellLife <= 0)
         { // removes the object from list but places sprite of died cell
-            CellType.RemoveAt(ListIndex);
-            Sprite.Draw(this.X, this.Y, this.CellSprite, ConsoleColor.DarkGray);
+            GameVars.Cells.Remove(this);
+            Sprite.Write(this.X, this.Y, this.CellSprite, ConsoleColor.DarkGray);
         }
 
-        WhenColliding(ref CellType, 1, 0); // checks the colliding in 4 directions
-        WhenColliding(ref CellType, 0, 1);
-        WhenColliding(ref CellType, -1, 0);
-        WhenColliding(ref CellType, 0, -1);
+        WhenColliding(1, 0, ref GameVars.Cells, ref GameVars.Reflectors); // checks the colliding in 4 directions
+        WhenColliding(0, 1, ref GameVars.Cells, ref GameVars.Reflectors);
+        WhenColliding(-1, 0, ref GameVars.Cells, ref GameVars.Reflectors);
+        WhenColliding(0, -1, ref GameVars.Cells, ref GameVars.Reflectors);
 
-        if(GameVars.CellsNotColliding == true)
+        if(!GameVars.CellsColliding)
         {
-            GameFuncs.Money += this.CellPowerGen;
-            GameFuncs.ReactorHeat += this.CellHeatGen;
+            GameVars.Money += this.CellPowerGen;
+            GameVars.ReactorHeat += this.CellHeatGen;
         }
 
-        GameFuncs.ReactorHeat = Math.Clamp(GameFuncs.ReactorHeat, 0, 999999);
-
-        GameVars.CellsNotColliding = true;
+        GameVars.CellsColliding = false;
     }
 
-    void WhenColliding(ref List<CellsInfo> CellType, int dirX, int dirY)
+    private void WhenColliding(int dirX, int dirY, ref List<CellsInfo> CellType, ref List<ReflectorsInfo> ReflectorType)
     {
         if (CellType.Exists(CBT => this.X + dirX == CBT.X && this.Y + dirY == CBT.Y))
         {
-            GameFuncs.Money += this.CellPowerGen * 2;
-            GameFuncs.ReactorHeat += this.CellHeatGen * 4;
+            GameVars.Money += this.CellPowerGen * 2;
+            GameVars.ReactorHeat += this.CellHeatGen * 4;
 
-            GameVars.CellsNotColliding = false;
+            GameVars.CellsColliding = true;
+        }
+
+        if (ReflectorType.Exists(RBT => this.X + dirX == RBT.X && this.Y + dirY == RBT.Y))
+        {
+            GameVars.Money += (long)(this.CellPowerGen * 1.1);
+            GameVars.ReactorHeat += this.CellHeatGen;
+
+            int index = ReflectorType.FindIndex(RBT => this.X + dirX == RBT.X && this.Y + dirY == RBT.Y);
+            ReflectorType[index].ReflectorLife--;
+
+            GameVars.CellsColliding = true;
         }
     }
 }
 
-public class VentsInfo
+public class ReflectorsInfo // class for neutron reflectors
+{
+    public byte X;
+    public byte Y;
+
+    public int ReflectorLife; 
+
+    public ConsoleColor ReflectorColor;
+
+    public ReflectorsInfo(byte sReflectorX, byte sReflectorY, int sReflectorLife, ConsoleColor sReflectorColor)
+    {
+        this.X = sReflectorX;
+        this.Y = sReflectorY;
+
+        this.ReflectorLife = sReflectorLife;
+
+        this.ReflectorColor = sReflectorColor;
+    }
+
+    public void Update()
+    {
+        if (ReflectorLife <= 0)
+        {
+            GameVars.Reflectors.Remove(this);
+            Sprite.Write(this.X, this.Y, " ");
+        }
+    }
+}
+
+public class PlatingsInfo // class for reactor platings
+{
+    public byte X;
+    public byte Y;
+
+    public long PlatingHeatCap;
+
+    public ConsoleColor PlatingColor;
+
+    public PlatingsInfo(byte sPlatingX, byte sPlatingY, long sPlatingHeatCap, ConsoleColor sPlatingColor)
+    {
+        this.X = sPlatingX;
+        this.Y = sPlatingY;
+
+        this.PlatingHeatCap = sPlatingHeatCap;
+
+        this.PlatingColor = sPlatingColor;
+    }
+
+    public void Update()
+    {
+        GameVars.MaxReactorHeat += this.PlatingHeatCap;
+    } 
+}
+
+/*public class CapacitorsInfo // class for energy capacitors
+{
+    public byte X;
+    public byte Y;
+
+    public long CapacitorStorage;
+
+    public int CapacitorBuff; // the % of auto selling the power
+
+    public ConsoleColor CapacitorColor;
+
+    public CapacitorsInfo(byte sCapacitorX, byte sCapacitorY, long sCapacitorStorage, int sCapacitorBuff, ConsoleColor sCapacitorColor)
+    {
+        this.X = sCapacitorX;
+        this.Y = sCapacitorY;
+
+        this.CapacitorStorage = sCapacitorStorage;
+
+        this.CapacitorBuff = sCapacitorBuff;
+
+        this.CapacitorColor = sCapacitorColor;
+    }
+
+    public void Update()
+    {
+
+    }
+}*/
+
+public class OutletsInfo // class for heat outlets 
+{ 
+    public byte X;
+    public byte Y;
+
+    public int TransferCap;
+
+    public ConsoleColor OutletColor;
+
+    public OutletsInfo(byte sOutletX, byte sOutletY, int sTransferCap, ConsoleColor sOutletColor)
+    {
+        this.X = sOutletX;
+        this.Y = sOutletY;
+
+        this.TransferCap = sTransferCap;
+
+        this.OutletColor = sOutletColor;
+    }
+
+    public void Update()
+    {
+        WhenColliding(1, 0, ref GameVars.Vents);
+        WhenColliding(0, 1, ref GameVars.Vents);
+        WhenColliding(-1, 0, ref GameVars.Vents);
+        WhenColliding(0, -1, ref GameVars.Vents);
+    }
+
+    private void WhenColliding(int dirX, int dirY, ref List<VentsInfo> VentType)
+    {
+        if (VentType.Exists(VBT => this.X + dirX == VBT.X && this.Y + dirY == VBT.Y))
+        {
+            int blockIndex = VentType.FindIndex(VBT => this.X + dirX == VBT.X && this.Y + dirY == VBT.Y);
+
+            GameVars.ReactorHeat -= VentType[blockIndex].VentingPower + this.TransferCap;
+            VentType[blockIndex].touchingOutletsCount++;
+        }
+    }
+}
+
+public class VentsInfo // class for heat vents
 {
     public byte X;
     public byte Y;
 
     public int VentingPower;
 
+    public int VentLife; // vents current life, vent life == venting power * 10
+    private int VML; // vent max life
+
     public ConsoleColor VentColor; // for loading save
 
-    public VentsInfo(byte sVentX, byte sVentY, int sVentingPower, ConsoleColor sVentColor)
+    public byte touchingOutletsCount;
+
+    public VentsInfo(byte sVentX, byte sVentY, int sVentingPower, int sVentLife, ConsoleColor sVentColor)
     {// 's' in variables means "set"
         this.X = sVentX;
         this.Y = sVentY;
 
         this.VentingPower = sVentingPower;
 
-        this.VentColor = sVentColor;
-    }
-
-    public void Update(ref List<VentsInfo> VentType)
-    {
-        GameFuncs.ReactorHeat -= this.VentingPower;
-
-        GameFuncs.ReactorHeat = Math.Clamp(GameFuncs.ReactorHeat, 0, 999999);
-    }
-}
-
-/*public class CellsSpecInf
-{
-    public int HeatGen;
-    public int PowerGen;
-
-    public int CellPrice;
-    public int CellLife;
-
-    public char CellSprite;
-    public ConsoleColor CellColor;
-
-    public CellsSpecInf (int sHeatGen, int sPowerGen, int sCellPrice, int sCellLife, char sCellSprite, ConsoleColor sCellColor)
-    {
-    }
-}
-
-public class VentsSpecInf
-{
-    public int VentLife;
-
-    public int VentPrice;
-
-    public char VentSprite;
-    public ConsoleColor VentColor;
-
-    public VentsSpecInf(int sVentLife, int sVentPrice, char sVentSprite, ConsoleColor sVentColor)
-    {
         this.VentLife = sVentLife;
+        this.VML = sVentLife;
 
-        this.VentPrice = sVentPrice;
-
-        this.VentSprite = sVentSprite;
         this.VentColor = sVentColor;
     }
-}*/
+
+    public void Update() // vent functionality // re write нахуй (maybe)
+    {
+        if (GameVars.ReactorHeat > 0) // if heat is more than it should be starting to destroy the vent
+            this.VentLife -= VML / 7;
+
+        WhenColliding(1, 0, GameVars.Cells);
+        WhenColliding(0, 1, GameVars.Cells);
+        WhenColliding(-1, 0, GameVars.Cells);
+        WhenColliding(0, -1, GameVars.Cells);
+
+        if (GameVars.ReactorHeat == 0 && this.VentLife > 0)
+        {
+            this.VentLife += VML / 7;
+            this.VentLife = Math.Clamp(VentLife, 0, VML);
+        }
+
+        VentHeatPrev(VML);
+
+        if (touchingOutletsCount > 1)
+        {
+            GameVars.Vents.Remove(this);
+            Sprite.Write(this.X, this.Y, " ");
+        }
+        this.touchingOutletsCount = 0;
+
+        if (this.VentLife <= 0)
+        {
+            GameVars.Vents.Remove(this);
+            Sprite.Write(this.X, this.Y, " ");
+        }
+    }
+
+    private void WhenColliding(int dirX, int dirY, List<CellsInfo> CellType)
+    {
+        if (CellType.Exists(CBT => this.X + dirX == CBT.X && this.Y + dirY == CBT.Y)) // CBT = cell block type
+        {
+            this.VentLife -= CellType[CellType.FindIndex(CBT => this.X + dirX == CBT.X && this.Y + dirY == CBT.Y)].CellHeatGen;
+            GameVars.ReactorHeat -= this.VentingPower;
+        }
+    }
+
+    private void VentHeatPrev(int VML) // previewing the life of the vent on the console 
+    { 
+        if (this.VentLife >= VML * 0.75) // shit, re write нахуй
+            Sprite.Write(this.X, this.Y, "#", this.VentColor);
+        else if (this.VentLife <= VML * 0.35)
+            Sprite.Write(this.X, this.Y, "#", this.VentColor, ConsoleColor.Red);
+    }
+}
